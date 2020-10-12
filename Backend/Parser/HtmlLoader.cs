@@ -25,8 +25,10 @@ namespace Backend.Parser
         {
             Client = new HttpClient();
 
+            #region Без настройки TLS не удается подключиться к сайту
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            #endregion
 
             this.Client.DefaultRequestHeaders.Add("User-Agent", "C# App");
             this.Url = $"{settings.SiteUrl}/{settings.PageId}/";
