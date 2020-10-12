@@ -16,7 +16,7 @@ namespace Backend.Parser
         public HttpClient Client        { get; set; }
         public string Url               { get; private set; }
         public string ReturnedHtmlCode  { get; private set; }
-
+        ///
         /// <summary>
         /// Конструктор загрузчика HTML
         /// </summary>
