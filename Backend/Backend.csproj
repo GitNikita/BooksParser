@@ -54,11 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\AbstractParser.cs" />
-    <Compile Include="Interfaces\ISettings.cs" />
+    <Compile Include="Workers\HtmlLoader.cs" />
+    <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="Models\OzonParser.cs" />
     <Compile Include="Models\HabrParser.cs" />
-    <Compile Include="Controllers\HtmlLoader.cs" />
-    <Compile Include="Controllers\ParsingWorker.cs" />
+    <Compile Include="Controller\ParsingController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

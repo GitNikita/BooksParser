@@ -3,14 +3,13 @@
     /// <summary>
     /// Интерфейс, определяющий общие настройки для реализующего парсера, для каждого свои
     /// </summary>
-    interface ISettings
+    interface IParser
     {
         /// <summary>
-        /// Адрес сайта
+        /// Обобщенный метод, необходим для получения данных из парсера
         /// </summary>
-        string SiteUrl { get; }        
-        /// <summary>
-        /// Начальная страница для парсинга
-        /// </summary>        
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        void GetData<T>(T data);
     }
 }

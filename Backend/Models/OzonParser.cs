@@ -5,15 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Backend.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace Backend
 {
-    class OzonParser : AbstractParser, ISettings
-    {
-        public string   SiteUrl             { get; private set; } = "https://www.ozon.ru/category/yazyki-programmirovaniya-33705/";
+    class OzonParser : AbstractParser, IParser
+    {        
         public int      StartPageForParse   { get; private set; }
         public int      EndPageForParse     { get; private set; }
         public string   PageId              { get; private set; }
+
+        public OzonParser(string siteUrl) :base( siteUrl )
+        {
+            siteUrl = "https://www.ozon.ru/category/yazyki-programmirovaniya-33705/";
+        }
 
         public override string[] Parse(IHtmlDocument sitePage)
         {            

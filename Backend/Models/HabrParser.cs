@@ -8,7 +8,7 @@ using Backend.Interfaces;
 
 namespace Backend.Controllers
 {
-    class HabrParser : AbstractParser, ISettings
+    class HabrParser : AbstractParser, IParser
     {
         public string   SiteUrl             { get; private set; } 
         public int      StartPageForParse   { get; private set; }

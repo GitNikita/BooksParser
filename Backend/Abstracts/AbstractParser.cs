@@ -14,21 +14,21 @@ namespace Backend.Interfaces
 
         public AbstractParser(string urlAddress)
         {
-            GetHtmlPageThrougthAngleSharpLibrary(urlAddress);            
+            GetHtmlPageThrougthSystemNetHttp(urlAddress);            
         }
 
-        private void GetHtmlPageThrougthAngleSharpLibrary(string url)
+        private void GetHtmlPageThrougthSystemNetHttp(string url)
         {
             HtmlLoader htmlLoader = new HtmlLoader();
             htmlLoader.ReadPage(url);
-            
-            SaveHtmlForReceiveToParser(htmlLoader);
+
+            SaveHtmlIntoField(htmlLoader);
         }
 
         /// <summary>
         /// Сохраняем страницу html в поле для доступа к нему через конкретный парсер
         /// </summary>
-        private void SaveHtmlForReceiveToParser(HtmlLoader loader)
+        private void SaveHtmlIntoField(HtmlLoader loader)
         {
             this.FinalHtmlCodeForParser = loader.ReturnedHtmlCode;
         }
