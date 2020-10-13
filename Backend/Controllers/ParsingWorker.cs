@@ -1,10 +1,6 @@
-﻿using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
+﻿using System;
 
-using Backend.Models;
-using System;
-
-namespace Backend.Parser
+namespace Backend.Controllers
 {
     class ParsingWorker
     {
@@ -12,7 +8,7 @@ namespace Backend.Parser
         //ConcreteSiteParser Parser;      // Экземпляр парсера конкретного сайта
        // public string[] result;
 
-        public ParsingWorker(ConcreteSiteParser HabrParser)
+        public ParsingWorker()
         {
             //this.Parser = HabrParser;
             //this.Loader = new HtmlLoader(this.Parser);

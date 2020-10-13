@@ -1,7 +1,10 @@
-﻿using Backend.Models;
-using Backend.Parser;
+﻿using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
+using AngleSharp.Html.Parser;
+using Backend.Controllers;
 using System;
-using System.Net;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Backend
 {
@@ -9,31 +12,19 @@ namespace Backend
     {
         static void Main(string[] args)
         {
-            //ConcreteSiteParser settings = new ConcreteSiteParser();
-            //settings.SiteUrl = "https://habr.com/ru";
-            //settings.PageId = "";
-            //settings.StartPageForParse = 1;
-            //settings.EndPageForParse = 2;
+            //HabrParser habrParser = new HabrParser();
+            OzonParser ozonParser = new OzonParser();            
 
-            //HtmlLoader loader = new HtmlLoader();
-            //loader.ReadPage("https://habr.com");
+            // Применяется библиотека AngleShap, интерфейс IHtmlDocument и класс HtmlParser,
+            //        // подробнее на https://github.com/AngleSharp/AngleSharp
+            HtmlParser domParser = new HtmlParser();
+            IHtmlDocument document = domParser.ParseDocument(pageFromHabr);
+            var result = Parse(document);
 
-            //ParsingWorker parser = new ParsingWorker(settings);
-            //parser.Start();
-
-            //using (WebClient client = new WebClient())
-            //{
-            //    client.Credentials = CredentialCache.DefaultCredentials;
-            //    string htmlCode = client.DownloadString("https://habr.com/ru");
-            //    Console.WriteLine(htmlCode);
-            //}
-
-            string urlAddress = "https://habr.com/ru";
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-
+            foreach (var tag in result)
+            {
+                Console.WriteLine(tag);
+            }
             Console.ReadLine();
         }
     }
