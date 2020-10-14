@@ -53,6 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ParserSettings.cs" />
+    <Compile Include="Models\ConcreteSiteParser.cs" />
+    <Compile Include="Parser\HtmlLoader.cs" />
+    <Compile Include="Parser\ParsingWorker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
