@@ -1,27 +1,21 @@
-﻿using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
-
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Linq;
-
-using Backend.Interfaces;
 using System.Runtime.CompilerServices;
 
-namespace Backend
+using Backend.Interfaces;
+using IParser = Backend.Interfaces.IParse;
+using AngleSharp.Html.Dom;
+using AngleSharp.Dom;
+
+namespace Backend.Models
 {
-    class OzonParser : AbstractParser, IParser
-    {        
-        public int      StartPageForParse   { get; private set; }
-        public int      EndPageForParse     { get; private set; }
-        public string   PageId              { get; private set; }
+    class OzonParser : IParse
+    {
 
-        public OzonParser(string siteUrl) :base( siteUrl )
+        // private string _url = "https://habr.ru/ru";
+
+        public string[] GetData(IHtmlDocument sitePage)
         {
-            siteUrl = "https://www.ozon.ru/category/yazyki-programmirovaniya-33705/";
-        }
-
-        public override string[] Parse(IHtmlDocument sitePage)
-        {            
             List<string> list = new List<string>();
 
             #region Считываем все заголовки <a href с классами "a2g0"
@@ -33,11 +27,10 @@ namespace Backend
             #endregion
 
             foreach (var item in items)
-            {                
+            {
                 list.Add(item.TextContent);
             }
             return list.ToArray();
         }
-
     }
 }

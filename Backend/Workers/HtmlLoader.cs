@@ -1,17 +1,16 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 
-namespace Backend.Controllers
+namespace Backend.Workers
 {
     /// <summary>
     /// Класс по типу браузера загружает в объект код html страницы
     /// </summary>
     class HtmlLoader
     {
-        public string LoadPage(string urlAddress)
+        public string ReadPage(string urlAddress)
         {
             try
             {                
@@ -59,7 +58,7 @@ namespace Backend.Controllers
 
                 return string.Empty;
             }
-            
-        }      
+            return string.Empty;
+        }       
     }
 }

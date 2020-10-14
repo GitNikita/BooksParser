@@ -3,20 +3,18 @@ using AngleSharp.Html.Dom;
 
 using System.Collections.Generic;
 using System.Linq;
+using IParser = Backend.Interfaces.IParse;
 
 using Backend.Interfaces;
 
-namespace Backend.Controllers
+namespace Backend.Models
 {
-    class HabrParser : AbstractParser, IParser
+    class HabrParser : IParse
     {
-        public string   SiteUrl             { get; private set; } 
-        public int      StartPageForParse   { get; private set; }
-        public int      EndPageForParse     { get; private set; }
-        public string   PageId              { get; private set; }
+        //private string _url = "https://www.ozon.ru/category/yazyki-programmirovaniya-33705/";
 
-        public override string[] Parse(IHtmlDocument sitePage)
-        {            
+        public string[] GetData(IHtmlDocument sitePage)
+        {
             List<string> list = new List<string>();
 
             #region Считываем все заголовки <a href с классами "post__title_link"
@@ -28,12 +26,10 @@ namespace Backend.Controllers
             #endregion
 
             foreach (var item in items)
-            {                
+            {
                 list.Add(item.TextContent);
             }
             return list.ToArray();
-        }
-
-       
+        }       
     }
 }

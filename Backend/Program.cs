@@ -1,10 +1,6 @@
-﻿using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
-using Backend.Controllers;
+﻿using Backend.Controller;
+using Backend.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Backend
 {
@@ -12,19 +8,19 @@ namespace Backend
     {
         static void Main(string[] args)
         {
-            //HabrParser habrParser = new HabrParser();
-            OzonParser ozonParser = new OzonParser();            
+            //OzonParser ozonParser = new OzonParser();
+            //ParsingController parser = new ParsingController("https://www.ozon.ru/category/yazyki-programmirovaniya-33705", ozonParser);
 
-            // Применяется библиотека AngleShap, интерфейс IHtmlDocument и класс HtmlParser,
-            //        // подробнее на https://github.com/AngleSharp/AngleSharp
-            HtmlParser domParser = new HtmlParser();
-            IHtmlDocument document = domParser.ParseDocument(pageFromHabr);
-            var result = Parse(document);
-
+            HabrParser habrParser = new HabrParser();
+            ParsingController parser = new ParsingController("https://habr.com/ru/", habrParser);
+            
+            var result = parser.ReceiveDataFromHtml();
+            
             foreach (var tag in result)
             {
                 Console.WriteLine(tag);
             }
+            Console.WriteLine("\nНажмите любую клавишу для продолжения...");
             Console.ReadLine();
         }
     }
