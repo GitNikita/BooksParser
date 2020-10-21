@@ -11,9 +11,6 @@ namespace ConsoleParser.Models
 {
     class OzonParser : IParse
     {
-
-        // private string _url = "https://habr.ru/ru";
-
         public string[] GetData(IHtmlDocument sitePage)
         {
             List<string> list = new List<string>();

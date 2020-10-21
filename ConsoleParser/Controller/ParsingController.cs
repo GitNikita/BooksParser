@@ -18,6 +18,10 @@ namespace ConsoleParser.Controller
             this._url = urlAddressSite;
         }
         
+        // Здесь необходимо реализовать выборку номера страницы &page из URL ссылки
+        // и циклом пройти по всем страницам с книгами, должно вывести по 36 на лист
+             
+
         public string[] ReceiveDataFromHtml()
         {
             // Выделяем память под объект
@@ -26,10 +30,12 @@ namespace ConsoleParser.Controller
             var htmlPage = _htmlLoader.ReadPage(this._url);
 
             // Применяется библиотека AngleSharp, интерфейс IHtmlDocument и класс HtmlParser,
-            //        // подробнее на https://github.com/AngleSharp/AngleSharp 
+            // подробнее на https://github.com/AngleSharp/AngleSharp 
             HtmlParser domParser = new HtmlParser();
-            IHtmlDocument document =  domParser.ParseDocument(htmlPage);         
-            
+            IHtmlDocument document =  domParser.ParseDocument(htmlPage);
+
+            PageSeeker seeker = new PageSeeker();            
+
             return this._parser.GetData(document);
         }        
     }
