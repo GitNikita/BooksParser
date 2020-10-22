@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 using ConsoleParser.Interfaces;
-using IParser = ConsoleParser.Interfaces.IParse;
+using IParser = ConsoleParser.Interfaces.IParser;
 using AngleSharp.Html.Dom;
 using AngleSharp.Dom;
 
 namespace ConsoleParser.Models
 {
-    class OzonParser : IParse
+    class OzonParser : IParser
     {
         public string[] GetData(IHtmlDocument sitePage)
         {

@@ -3,13 +3,13 @@ using AngleSharp.Html.Dom;
 
 using System.Collections.Generic;
 using System.Linq;
-using IParser = ConsoleParser.Interfaces.IParse;
+using IParser = ConsoleParser.Interfaces.IParser;
 
 using ConsoleParser.Interfaces;
 
 namespace ConsoleParser.Models
 {
-    class HabrParser : IParse
+    class HabrParser : IParser
     {
         //private string _url = "https://www.ozon.ru/category/yazyki-programmirovaniya-33705/";
 

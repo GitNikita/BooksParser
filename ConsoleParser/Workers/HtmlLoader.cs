@@ -13,7 +13,7 @@ namespace ConsoleParser.Workers
         public string ReadPage(string urlAddress)
         {
             try
-            {                
+            {
                 #region Без настройки TLS не удается подключиться к сайту
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

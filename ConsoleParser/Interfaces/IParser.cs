@@ -5,7 +5,7 @@ namespace ConsoleParser.Interfaces
     /// <summary>
     /// Интерфейс, определяющий общие настройки для реализующего парсера, для каждого свои
     /// </summary>
-    interface IParse
+    interface IParser
     {
         /// <summary>
         /// Метод необходим для получения данных из парсера

@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ParsingController.cs" />
-    <Compile Include="Interfaces\IParse.cs" />
+    <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="Models\HabrParser.cs" />
     <Compile Include="Models\OzonParser.cs" />
     <Compile Include="Program.cs" />

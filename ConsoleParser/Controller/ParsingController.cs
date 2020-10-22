@@ -3,16 +3,15 @@ using AngleSharp.Html.Parser;
 using ConsoleParser.Interfaces;
 using ConsoleParser.Workers;
 
-
 namespace ConsoleParser.Controller
 {
     class ParsingController
     {
-        private IParse _parser;
+        private IParser _parser;
         private string _url;
         private HtmlLoader _htmlLoader;
 
-        public ParsingController(string urlAddressSite, IParse parserExemplair)
+        public ParsingController(string urlAddressSite, IParser parserExemplair)
         {
             this._parser = parserExemplair;
             this._url = urlAddressSite;
