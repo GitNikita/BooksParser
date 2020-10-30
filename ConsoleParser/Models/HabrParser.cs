@@ -1,35 +1,25 @@
-﻿using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
-
-using System.Collections.Generic;
-using System.Linq;
-using IParser = ConsoleParser.Interfaces.IParser;
-
-using ConsoleParser.Interfaces;
+﻿using ConsoleParser.Abstracts;
 
 namespace ConsoleParser.Models
 {
-    class HabrParser : IParser
+    class HabrParser : Parser
     {
-        //private string _url = "https://www.ozon.ru/category/yazyki-programmirovaniya-33705/";
-
-        public string[] GetData(IHtmlDocument sitePage)
+        public override string AddPageNumber(string url, int pageNum)
         {
-            List<string> list = new List<string>();
+            string finalString = url + "page" + pageNum + "/";
+            return finalString;
+        }
 
-            #region Считываем все заголовки <a href с классами "post__title_link"
-            IEnumerable<IElement> items = sitePage.QuerySelectorAll("a")
-                .Where(item =>
-                item.ClassName != null
-                &&
-                item.ClassName.Contains("post__title_link"));
-            #endregion
-
-            foreach (var item in items)
-            {
-                list.Add(item.TextContent);
-            }
-            return list.ToArray();
-        }       
+        // 
+        /*
+         AddPageNumber_Test()
+        string expected = "https://habr.com/ru/page3/";
+        string actual = string.Empty;
+         
+        HabrParser haParser = new HabrParser();
+        actual =  haParser.AddPageNumber("https://habr.com/ru/", 3);
+        Assert.AreEquals(expected, actual);
+        )
+         */
     }
 }

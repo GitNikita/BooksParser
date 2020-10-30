@@ -11,18 +11,18 @@ namespace ConsoleParser.Workers
     class HtmlLoader
     {
         public string ReadPage(string urlAddress)
-        {
+        {           
             try
             {
-                #region Без настройки TLS не удается подключиться к сайту
+                // Без настройки TLS не удается подключиться к сайту
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                #endregion
+                
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
                 // Обязательно сбрасываем настройки прокси, иначе идет поиск прокси и запросы закрываются по таймауту
                 request.Proxy = null;
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();                
-
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                                
                 if (response.StatusCode == HttpStatusCode.OK)
                 {                    
                     Stream receiveStream = response.GetResponseStream();
@@ -43,22 +43,24 @@ namespace ConsoleParser.Workers
                     readStream.Close();
 
                     return endResult;
-                }                
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
-            catch (WebException webError)
+            
+            catch (Exception ex)
             {                
                 Console.WriteLine
                     (
-                    "При подключении к сайту возникла ошибка! " 
-                    + Environment.NewLine 
-                    + $"Проблемный сайт:  { urlAddress } "
-                    + Environment.NewLine 
-                    + webError.Message
+                    "При работе HtmlLoader.ReadPage(urlAddress) возникла ошибка: "
+                    + Environment.NewLine                     
+                    + ex.Message
                     );
 
                 return string.Empty;
-            }
-            return string.Empty;
+            }            
         }       
     }
 }

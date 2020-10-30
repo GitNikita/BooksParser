@@ -52,8 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\Parser.cs" />
     <Compile Include="Controller\ParsingController.cs" />
-    <Compile Include="Interfaces\IParser.cs" />
+    <Compile Include="Models\HtmlPageData.cs" />
     <Compile Include="Models\HabrParser.cs" />
     <Compile Include="Models\OzonParser.cs" />
     <Compile Include="Program.cs" />
