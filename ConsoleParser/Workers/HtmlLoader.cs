@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Text;
+using AngleSharp.Html.Dom;
 
 namespace ConsoleParser.Workers
 {
@@ -20,37 +19,44 @@ namespace ConsoleParser.Workers
             this._urlAddress = urlAddress;
         }
 
-        public string ReadPage()
+        public IHtmlDocument ReadPage()
         {
-
             try
             {
-                ActivateTlsProtocol();
+                ActivateTls_Ssl_Protocols();
 
                 HttpWebRequest requestToSite = (HttpWebRequest)WebRequest.Create(this._urlAddress);
-                
-                // Обязательно сбрасываем настройки прокси, иначе идет поиск прокси и запросы закрываются по таймауту
-                requestToSite.Proxy = null;
+
+                // Обязательно сбрасываем настройки прокси, иначе запросы закрываются по таймауту,
+                // если создатель запроса отделен прокси сервером
+
+                requestToSite.Proxy = null;                
+                requestToSite.UseDefaultCredentials = true;
 
                 HttpWebResponse responseFromSite = (HttpWebResponse)requestToSite.GetResponse();
-
-                return ResponseHandlingForOutput(responseFromSite);
+                var sitePageInString = ResponseHandlingForOutput(responseFromSite);
                 
+                return GetHtmlDomStructure(sitePageInString);
             }
             
             catch (Exception exception)
             {
                 GenerateErrorConsoleMessage(exception);
-
-                return string.Empty;
+                return GetHtmlDomStructure(string.Empty);
             }
 
-        }
-        private void ActivateTlsProtocol()
+        }        
+
+        private void ActivateTls_Ssl_Protocols()
         {
-            // Без настройки TLS не удается подключиться к сайту
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            // Без настройки TLS/SSL не удается подключиться к части сайтов
+            ServicePointManager.SecurityProtocol = 
+                SecurityProtocolType.Ssl3 
+                | SecurityProtocolType.Tls 
+                | SecurityProtocolType.Tls11 
+                | SecurityProtocolType.Tls12;
+            
+            ServicePointManager.Expect100Continue = true;            
         }
 
         private string ResponseHandlingForOutput(HttpWebResponse response)
@@ -79,13 +85,18 @@ namespace ConsoleParser.Workers
             {
                 return this._textOfHtmlPage = string.Empty;
             }
-        }       
+        }
+        private IHtmlDocument GetHtmlDomStructure(string htmlPage)
+        {
+            AngleSharpDataDownloader angleDownloader = new AngleSharpDataDownloader(htmlPage);
+            return angleDownloader.GetDomStructureOfSite();
+        }
 
         private void CloseAllReaders(HttpWebResponse httpResponseForClose, StreamReader streamForClose)
         {
             // Обязательно закрываем "html браузер"
             httpResponseForClose.Close();
-            // Обязательно закрываем поток
+            // Обязательно закрываем поток чтения
             streamForClose.Close();
         }
         private void GenerateErrorConsoleMessage(Exception ex)

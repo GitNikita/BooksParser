@@ -52,13 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstracts\Parser.cs" />
+    <Compile Include="Interfaces\IGetBooks.cs" />
     <Compile Include="Controller\ParsingController.cs" />
     <Compile Include="Models\HtmlPageData.cs" />
-    <Compile Include="Models\HabrParser.cs" />
-    <Compile Include="Models\OzonParser.cs" />
+    <Compile Include="Implemented_Parsers\HabrParser.cs" />
+    <Compile Include="Implemented_Parsers\OzonParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workers\AngleSharpDataDownloader.cs" />
     <Compile Include="Workers\HtmlLoader.cs" />
   </ItemGroup>
   <ItemGroup>

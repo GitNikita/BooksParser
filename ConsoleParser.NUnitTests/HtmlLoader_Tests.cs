@@ -1,5 +1,7 @@
-﻿using NUnit.Framework;
-using ConsoleParser.Workers;
+﻿using ConsoleParser.Workers;
+using NUnit.Framework;
+using AngleSharp.Html.Dom;
+using AngleSharp.Html.Parser;
 
 namespace ConsoleParser.NUnitTests
 {
@@ -7,17 +9,14 @@ namespace ConsoleParser.NUnitTests
     public class HtmlLoader_Tests
     {
         [Test]        
-        public void ReadPage_ReturnHtmlInString_Test()
+        public void ReadPage_ReturnCorrectDomObject_Test()
         {
-            string url = "https://habr.com/ru/";            
-            HtmlLoader loader = new HtmlLoader(url);
+            string inputTestUrl = "https://habr.com/ru/";
             
-            // Good - !String.Empty
-            // Bad - String.Empty            
+            HtmlLoader loader = new HtmlLoader(inputTestUrl);
+
+            Assert.IsTrue(loader.ReadPage() is IHtmlDocument);
             
-           // Если возвращается пусто, значит все хуюсто xD
-           // При ошибках коннекта к сайту возвращается string.Empty
-            Assert.IsNotEmpty(loader.ReadPage());
         }
     }
 }

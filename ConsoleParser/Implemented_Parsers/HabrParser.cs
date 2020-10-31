@@ -1,10 +1,15 @@
-﻿using ConsoleParser.Abstracts;
+﻿using ConsoleParser.Interfaces;
 
 namespace ConsoleParser.Models
 {
-    class HabrParser : Parser
+    class HabrParser : IGetBooks
     {
-        public override string AddPageNumber(string url, int pageNum)
+        public string[] GetBooks()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private string AddPageNumber(string url, int pageNum)
         {
             string finalString = url + "page" + pageNum + "/";
             return finalString;
