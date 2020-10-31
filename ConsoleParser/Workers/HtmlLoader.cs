@@ -1,66 +1,102 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ConsoleParser.Workers
 {
     /// <summary>
-    /// Класс по типу браузера загружает в объект код html страницы
+    /// Класс подключается по Url адресу, затем возвращает код html страницы в виде строки
     /// </summary>
-    class HtmlLoader
+    public class HtmlLoader
     {
-        public string ReadPage(string urlAddress)
-        {           
+        private string _urlAddress;
+        private string _textOfHtmlPage;
+
+        public HtmlLoader ( string urlAddress )
+        {
+            this._urlAddress = urlAddress;
+        }
+
+        public string ReadPage()
+        {
+
             try
             {
-                // Без настройки TLS не удается подключиться к сайту
-                ServicePointManager.Expect100Continue = true;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ActivateTlsProtocol();
+
+                HttpWebRequest requestToSite = (HttpWebRequest)WebRequest.Create(this._urlAddress);
                 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
                 // Обязательно сбрасываем настройки прокси, иначе идет поиск прокси и запросы закрываются по таймауту
-                request.Proxy = null;
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                                
-                if (response.StatusCode == HttpStatusCode.OK)
-                {                    
-                    Stream receiveStream = response.GetResponseStream();
-                    StreamReader readStream = null;
+                requestToSite.Proxy = null;
 
-                    if (response.CharacterSet == null)
-                    {
-                        readStream = new StreamReader(receiveStream);
-                    }
-                    else
-                    {
-                        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
-                    }
+                HttpWebResponse responseFromSite = (HttpWebResponse)requestToSite.GetResponse();
 
-                    string endResult = readStream.ReadToEnd();
+                return ResponseHandlingForOutput(responseFromSite);
+                
+            }
+            
+            catch (Exception exception)
+            {
+                GenerateErrorConsoleMessage(exception);
 
-                    response.Close();
-                    readStream.Close();
+                return string.Empty;
+            }
 
-                    return endResult;
+        }
+        private void ActivateTlsProtocol()
+        {
+            // Без настройки TLS не удается подключиться к сайту
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        }
+
+        private string ResponseHandlingForOutput(HttpWebResponse response)
+        {
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Stream receiveStream = response.GetResponseStream();
+                StreamReader readStream = StreamReader.Null;
+
+                if (response.CharacterSet == null)
+                {
+                    readStream = new StreamReader(receiveStream);
                 }
                 else
                 {
-                    return string.Empty;
+                    readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
                 }
+
+                this._textOfHtmlPage = readStream.ReadToEnd();
+
+                CloseAllReaders(response, readStream);
+
+                return this._textOfHtmlPage;
             }
-            
-            catch (Exception ex)
-            {                
-                Console.WriteLine
+            else
+            {
+                return this._textOfHtmlPage = string.Empty;
+            }
+        }       
+
+        private void CloseAllReaders(HttpWebResponse httpResponseForClose, StreamReader streamForClose)
+        {
+            // Обязательно закрываем "html браузер"
+            httpResponseForClose.Close();
+            // Обязательно закрываем поток
+            streamForClose.Close();
+        }
+        private void GenerateErrorConsoleMessage(Exception ex)
+        {
+            Console.WriteLine
                     (
                     "При работе HtmlLoader.ReadPage(urlAddress) возникла ошибка: "
-                    + Environment.NewLine                     
+                    + Environment.NewLine
                     + ex.Message
                     );
-
-                return string.Empty;
-            }            
-        }       
+        }
+        
     }
 }

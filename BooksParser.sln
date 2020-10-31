@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksParser", "BooksParser\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleParser", "ConsoleParser\ConsoleParser.csproj", "{5A5370AF-03A7-42C0-BC65-B2B48C96E3C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleParserService", "ConsoleParserService\ConsoleParserService.csproj", "{2DE16D8A-5B80-4809-96AE-44BD0BF61226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleParserService", "ConsoleParserService\ConsoleParserService.csproj", "{2DE16D8A-5B80-4809-96AE-44BD0BF61226}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleParser.NUnitTests", "ConsoleParser.NUnitTests\ConsoleParser.NUnitTests.csproj", "{D48BB594-F4BE-4F30-AF78-8B7B17DB7FBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{2DE16D8A-5B80-4809-96AE-44BD0BF61226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DE16D8A-5B80-4809-96AE-44BD0BF61226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DE16D8A-5B80-4809-96AE-44BD0BF61226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D48BB594-F4BE-4F30-AF78-8B7B17DB7FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D48BB594-F4BE-4F30-AF78-8B7B17DB7FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D48BB594-F4BE-4F30-AF78-8B7B17DB7FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D48BB594-F4BE-4F30-AF78-8B7B17DB7FBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
