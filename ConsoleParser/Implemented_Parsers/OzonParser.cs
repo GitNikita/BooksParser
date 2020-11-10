@@ -2,9 +2,9 @@
 using AngleSharp.Html.Dom;
 using ConsoleParser.Interfaces;
 
-namespace ConsoleParser.Implemented_Parsers
+namespace ConsoleParser.Models
 {
-    public class OzonParser : IGetBooks
+    class OzonParser : IGetBooks
     {
         public string[] GetBooks(IHtmlDocument sitePage, string tag, string cssClass)
         {
