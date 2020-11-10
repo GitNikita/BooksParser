@@ -29,10 +29,17 @@ namespace ConsoleParser.Workers
 
                 // Обязательно сбрасываем настройки прокси, иначе запросы закрываются по таймауту,
                 // если создатель запроса отделен прокси сервером
-
-                requestToSite.Proxy = null;                
+                requestToSite.Proxy = null;
                 requestToSite.UseDefaultCredentials = true;
-
+                requestToSite.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 OPR/71.0.3770.310"; ;
+                requestToSite.Headers.Set("Content-Language", "en, ru");
+                requestToSite.ContentType = "application/x-www-form-urlencoded";
+                requestToSite.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                //requestToSite.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip,deflate,sdch");
+                requestToSite.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-GB,en-US;q=0.8,en;q=0.6");
+                requestToSite.Headers.Set(HttpRequestHeader.AcceptCharset, "ISO-8859-1,utf-8;q=0.7,*;q=0.3");
+                requestToSite.Method = "GET";
+                
                 HttpWebResponse responseFromSite = (HttpWebResponse)requestToSite.GetResponse();
                 var sitePageInString = ResponseHandlingForOutput(responseFromSite);
                 
@@ -88,7 +95,7 @@ namespace ConsoleParser.Workers
         }
         private IHtmlDocument GetHtmlDomStructure(string htmlPage)
         {
-            AngleSharpDataDownloader angleDownloader = new AngleSharpDataDownloader(htmlPage);
+            DomStructureLoader angleDownloader = new DomStructureLoader(htmlPage);
             return angleDownloader.GetDomStructureOfSite();
         }
 
