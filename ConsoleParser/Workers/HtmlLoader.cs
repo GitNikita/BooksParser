@@ -88,7 +88,7 @@ namespace ConsoleParser.Workers
         }
         private IHtmlDocument GetHtmlDomStructure(string htmlPage)
         {
-            AngleSharpDataDownloader angleDownloader = new AngleSharpDataDownloader(htmlPage);
+            DomStructureLoader angleDownloader = new DomStructureLoader(htmlPage);
             return angleDownloader.GetDomStructureOfSite();
         }
 

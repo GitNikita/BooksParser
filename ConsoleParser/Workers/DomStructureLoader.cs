@@ -6,10 +6,10 @@ using AngleSharp.Html.Parser;
 
 namespace ConsoleParser.Workers
 {
-    public class AngleSharpDataDownloader
+    public class DomStructureLoader
     {
         private string _sitePageInString;
-        public AngleSharpDataDownloader(string sitePageInString)
+        public DomStructureLoader(string sitePageInString)
         {
             this._sitePageInString = sitePageInString;
         }

@@ -2,7 +2,7 @@
 using AngleSharp.Html.Dom;
 using ConsoleParser.Interfaces;
 
-namespace ConsoleParser.Models
+namespace ConsoleParser.Implemented_Parsers
 {
     class OzonParser : IGetBooks
     {

@@ -1,6 +1,6 @@
 ﻿using ConsoleParser.Interfaces;
 
-namespace ConsoleParser.Models
+namespace ConsoleParser.Implemented_Parsers
 {
     class HabrParser : IGetBooks
     {
@@ -15,7 +15,7 @@ namespace ConsoleParser.Models
             return finalString;
         }
 
-        // 
+        // TODO
         /*
          AddPageNumber_Test()
         string expected = "https://habr.com/ru/page3/";
