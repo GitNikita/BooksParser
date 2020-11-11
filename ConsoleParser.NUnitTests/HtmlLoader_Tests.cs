@@ -15,8 +15,7 @@ namespace ConsoleParser.NUnitTests
             
             HtmlLoader loader = new HtmlLoader(inputTestUrl);
 
-            Assert.IsTrue(loader.ReadPage() is IHtmlDocument);
-            
+            Assert.IsTrue(loader.ReadPage() is IHtmlDocument);            
         }
     }
 }
