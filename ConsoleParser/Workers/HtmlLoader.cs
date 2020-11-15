@@ -11,21 +11,21 @@ namespace ConsoleParser.Workers
     /// </summary>
     public class HtmlLoader
     {
-        private string _urlAddress;
+        //private string _urlAddress;
         private string _textOfHtmlPage;
 
-        public HtmlLoader ( string urlAddress )
+        public HtmlLoader ()
         {
-            this._urlAddress = urlAddress;
+            //this._urlAddress = urlAddress;
         }
 
-        public IHtmlDocument ReadPage()
+        public IHtmlDocument ReadPage(string urlAddress)
         {
             try
             {
                 ActivateTls_Ssl_Protocols();
 
-                HttpWebRequest requestToSite = (HttpWebRequest)WebRequest.Create(this._urlAddress);
+                HttpWebRequest requestToSite = (HttpWebRequest)WebRequest.Create(urlAddress);
 
                 // Обязательно сбрасываем настройки прокси, иначе запросы закрываются по таймауту,
                 // если создатель запроса отделен прокси сервером
@@ -44,7 +44,6 @@ namespace ConsoleParser.Workers
                 GenerateErrorConsoleMessage(exception);
                 return GetHtmlDomStructure(string.Empty);
             }
-
         }        
 
         private void ActivateTls_Ssl_Protocols()
